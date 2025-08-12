@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- =========================================================
+       Estate Mitra — Unified One-file (HTML+CSS only)
+       Combines Part A (site content) and Part B (concept deck).
+       All visuals inline as data URIs; no external dependencies.
+       ========================================================= -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Estate Mitra — Real Estate Listing & Lead Gen (Concept Demo)</title>
+  <meta name="description" content="Bilingual real estate listing and lead generation platform. One-page concept demo with localized content, SEO optimizations, lead capture, and future roadmap." />
+  <link rel="icon" href='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 64 64"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="%230B3D91" offset="0"/><stop stop-color="%23345bd6" offset="1"/></linearGradient></defs><rect rx="12" ry="12" width="64" height="64" fill="url(%23g)"/><path d="M8 44h48v8H8zM12 40h10v4H12zM24 28h10v16H24zM36 22h10v22H36zM14 36l18-14 18 9" fill="none" stroke="%23ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>' />
+  <meta name="theme-color" content="#0B3D91" />
+  <style>
+    :root {
+      --bg: #0a0c10; --panel: #0f1320; --card: #111726; --ink: #eaf2ff; --ink-d: #d8e4ff;
+      --muted: #a9b9d6; --brand: #0B3D91; --accent: #ff6b3d; --line: rgba(255,255,255,0.12);
+      --good: #1fd67d; --bad: #ff6b6b;
+      --s0: 0.25rem; --s1: 0.5rem; --s2: 0.75rem; --s3: 1rem; --s4: 1.5rem; --s5: 2rem; --s6: 3rem; --s7: 4rem;
+      --fs-xxl: clamp(2.2rem, 4vw, 3.3rem);
+      --fs-xl: clamp(1.5rem, 2.4vw, 2.1rem);
+      --fs-lg: clamp(1.05rem, 1.4vw, 1.25rem);
+      --fs-sm: 0.92rem;
+      --radius-xl: 22px; --radius: 14px; --shadow: 0 10px 30px rgba(0,0,0,0.35);
+      --measure: 68ch; --maxw: 1200px;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Arial, sans-serif;
+      background:
+        radial-gradient(1200px 600px at 20% -10%, #0d1730 0%, #0a0c10 60%),
+        radial-gradient(1000px 500px at 110% 10%, #101a36 0%, transparent 50%);
+      color: var(--ink); line-height: 1.56;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    figure { margin: 0; }
+    .measure { max-width: var(--measure); }
+    code { background: #0e1421; border: 1px solid var(--line); padding: 0.12rem 0.35rem; border-radius: 6px; }
+    .eyebrow { color: var(--muted); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: var(--s2); }
+    .display { font-size: var(--fs-xxl); line-height: 1.08; margin: 0 0 var(--s3); }
+    .section-title { font-size: var(--fs-xl); margin: 0 0 var(--s3); }
+    .lead { font-size: var(--fs-lg); color: var(--ink-d); margin: 0 0 var(--s4); }
+    .tiny { font-size: var(--fs-sm); color: var(--muted); }
+    .section { max-width: var(--maxw); margin: 0 auto; padding: var(--s7) var(--s3); }
+    .site-header {
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(7,10,18,0.7); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav {
+      max-width: var(--maxw); margin: 0 auto; padding: var(--s3);
+      display: grid; grid-template-columns: 1fr auto auto; gap: var(--s3); align-items: center;
+    }
+    .brand { display: flex; gap: var(--s2); align-items: center; text-decoration: none; color: var(--ink); font-weight: 800; letter-spacing: 0.2px; }
+    .brand__mark { width: 28px; height: 28px; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35)); }
+    .brand__text { }
+    .nav__links { display: flex; gap: var(--s2); flex-wrap: wrap; list-style: none; margin: 0; padding: 0; }
+    .nav__link { text-decoration: none; color: var(--ink); border: 1px solid transparent; padding: 0.55rem 0.9rem; border-radius: 999px; }
+    .nav__link:hover { border-color: var(--line); }
+    .nav__cta { background: var(--brand); }
+    .lang-toggle { display: flex; gap: 0.5rem; align-items: center; }
+    .toggle-ghost { width: 38px; height: 22px; border-radius: 999px; border: 2px solid var(--line); position: relative; }
+    .toggle-ghost::after { content: ""; position: absolute; width: 14px; height: 14px; border-radius: 50%; background: var(--accent); top: 2px; left: 2px; opacity: 0.8; }
+    @media (max-width: 640px) {
+      .nav { grid-template-columns: 1fr auto; gap: var(--s2); }
+      .nav__links { display: none; }
+    }
+    .hero { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: var(--s5); align-items: center; }
+    .hero__stack { display: grid; gap: var(--s3); }
+    .kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s2); }
+    .kpi { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: var(--s3); }
+    .kpi__bar { height: 16px; border-radius: 9px; background: var(--good); }
+    .kpi__bar--1 { width: 78%; }
+    .kpi__bar--2 { width: 35%; background: var(--bad); }
+    .kpi__bar--3 { width: 92%; }
+    .summary { margin-top: var(--s4); background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: var(--s3); }
+    .summary__grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s3); }
+    .summary__chip { display: inline-block; padding: 0.4rem 0.7rem; border-radius: 999px; background: #122149; border: 1px solid #2c4580; color: #b6c7ee; margin: 0.15rem 0.2rem 0 0; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s3); }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s3); }
+    @media (max-width: 980px) {
+      .hero { grid-template-columns: 1fr; }
+      .summary__grid { grid-template-columns: 1fr; }
+      .grid-3 { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .grid-3, .wbd__grid { grid-template-columns: 1fr; }
+      .arch__row { grid-template-columns: 1fr; }
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow); }
+    .card__media { aspect-ratio: 16/10; background: #0e1421; border-bottom: 1px solid var(--line); }
+    .card__body { padding: var(--s3); }
+    .card__title { margin: 0 0 var(--s2); font-weight: 800; }
+    .form { margin-top: var(--s4); background: var(--panel); border: 1px dashed #49608a; border-radius: var(--radius); padding: var(--s4); }
+    .form label { display: block; margin: 0.5rem 0 0.3rem; }
+    .form input, .form textarea {
+      width: 100%; padding: 0.8rem 0.9rem;
+      border-radius: 10px;
+      border: 1px solid #334a78;
+      background: #0f1726;
+      color: var(--ink);
+    }
+    .btn { display: inline-block; margin-top: var(--s2); padding: 0.8rem 1.1rem; border-radius: 999px; background: var(--accent); color: #000; font-weight: 800; border: none; cursor: pointer; }
+    .btn--ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); cursor: pointer; }
+    .arch { margin-top: var(--s4); border: 1px dashed #4a6aa8; border-radius: var(--radius); padding: var(--s3); }
+    .arch__row { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s2); margin: 0.6rem 0; }
+    .arch__box { border: 1px solid var(--line); background: #0e1421; border-radius: 10px; padding: 0.9rem; text-align: center; }
+    .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); }
+    table { border-collapse: collapse; width: 100%; }
+    .table-bmc th, .table-bmc td { border: 1px solid var(--line); padding: 0.85rem 0.9rem; vertical-align: top; }
+    .table-bmc th { text-align: left; background: #0f1a33; color: #d8e4ff; position: sticky; top: 0; font-weight: 600; letter-spacing: 0.02em; }
+    .badge { display: inline-block; padding: 0.15rem 0.45rem; border-radius: 999px; background: #122149; border: 1px solid #2c4580; color: #b6c7ee; font-size: 0.76rem; }
+    .forces__diagram { display: grid; gap: var(--s2); grid-template-areas: "sup buyers" "rivalry rivalry" "new subs"; grid-template-columns: 1fr 1fr; }
+    .force { background: #0e1421; border: 1px solid var(--line); border-radius: var(--radius); padding: var(--s3); }
+    .force--suppliers { grid-area: sup; }
+    .force--buyers { grid-area: buyers; }
+    .force--rivalry { grid-area: rivalry; border-color: #3358a8; }
+    .force--new { grid-area: new; }
+    .force--subs { grid-area: subs; }
+    @media (max-width: 980px) {
+      .forces__diagram { grid-template-areas: "sup" "buyers" "rivalry" "new" "subs"; grid-template-columns: 1fr; }
+    }
+    .wbd__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s3); }
+    .wbd__card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: var(--s3); display: flex; flex-direction: column; gap: var(--s2); }
+    .mock-row { display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center; }
+    .chip, .mock, .urlbar, .filetag, .sm, .mapmock {
+      background: #0e1421; border: 1px solid var(--line); border-radius: 10px;
+      padding: 0.6rem 0.8rem; color: var(--ink); text-decoration: none;
+    }
+    .sitemap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.4rem; margin-top: 0.5rem; }
+    .sm { text-align: center; font-family: ui-monospace, Consolas, monospace; }
+    .panel { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: var(--s4); }
+    .cta { text-align: center; }
+    .cta__buttons { display: flex; justify-content: center; gap: var(--s2); margin-top: var(--s3); }
+    .site-footer { max-width: var(--maxw); margin: 0 auto; padding: var(--s6) var(--s3); border-top: 1px solid var(--line); color: var(--muted); text-align: center; }
+    .credit { margin-top: var(--s2); color: var(--muted); }
+    main a { color: var(--accent); text-decoration: none; }
+    main a:hover { text-decoration: underline; }
+    ul { list-style: disc inside; margin: 0.5em 0 0.5em 1em; }
+    #services ul li {
+      background: url('data:image/svg+xml,%3Csvg width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"%3E%3Ccircle cx="6" cy="6" r="6" fill="%23ff6b3d"/%3E%3C/svg%3E') no-repeat left center;
+      background-size: 8px 8px;
+      padding: 0.2em 0 0.2em 1.2em;
+      margin: 0.3em 0;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <nav class="nav" aria-label="Main">
+      <a class="brand" href="#hero">
+        <svg class="brand__mark" viewBox="0 0 64 64" aria-hidden="true">
+          <defs><linearGradient id="brandg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0B3D91" offset="0"/><stop stop-color="#345bd6" offset="1"/></linearGradient></defs>
+          <rect rx="10" ry="10" width="64" height="64" fill="url(#brandg)"/>
+          <path d="M10 44h44v6H10zM14 40h10v4H14zM26 28h10v16H26zM38 22h10v22H38zM16 36l16-12 16 9"
+                fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="brand__text">Estate <strong>Mitra</strong></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="#summary" class="nav__link">Summary</a></li>
+        <li><a href="#solution" class="nav__link">Solution</a></li>
+        <li><a href="#business" class="nav__link">Business</a></li>
+        <li><a href="#wbd" class="nav__link">WBD</a></li>
+        <li><a href="#analysis" class="nav__link">Analysis</a></li>
+        <li><a href="#cta" class="nav__link nav__cta">Next Steps</a></li>
+        <li><a href="#contact" class="nav__link">Contact</a></li>
+      </ul>
+      <div class="lang-toggle" aria-label="Language toggle concept">
+        <span>EN</span><div class="toggle-ghost" role="img" aria-label="Toggle visual"></div><span lang="te">TE</span>
+      </div>
+    </nav>
+  </header>
+  <main id="content">
+    <!-- HERO -->
+    <section id="hero" class="section hero" role="region" aria-labelledby="hero-title">
+      <!-- Simple image (skyline-like) -->
+      <img class="img-soft" alt="Urban skyline near coast at dusk"
+        src='data:image/svg+xml;utf8,
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600">
+          <defs>
+            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#0f214f"/><stop offset="1" stop-color="#0a1126"/>
+            </linearGradient>
+            <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#ff9a66"/><stop offset="1" stop-color="#ff6b3d"/>
+            </linearGradient>
+            <linearGradient id="b" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#1a2a5e"/><stop offset="1" stop-color="#0f1a33"/>
+            </linearGradient>
+            <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0.25"/><feBlend mode="soft-light"/></filter>
+          </defs>
+          <rect width="1200" height="600" fill="url(%23sky)"/>
+          <circle cx="980" cy="120" r="70" fill="url(%23sun)" opacity="0.9"/>
+          <rect x="0" y="420" width="1200" height="180" fill="#0c244b"/>
+          <g filter="url(%23grain)" opacity="0.95">
+            <rect x="110" y="210" width="100" height="270" fill="url(%23b)"/><rect x="240" y="260" width="120" height="220" fill="url(%23b)"/>
+            <rect x="390" y="190" width="100" height="290" fill="url(%23b)"/><rect x="520" y="240" width="130" height="240" fill="url(%23b)"/>
+            <rect x="680" y="210" width="100" height="270" fill="url(%23b)"/><rect x="800" y="250" width="100" height="230" fill="url(%23b)"/>
+          </g>
+        </svg>' />
+
+      <div class="hero__stack">
+        <p class="eyebrow">Problem &amp; Opportunity</p>
+        <h1 id="hero-title" class="display">Localised Discovery. Faster Lead Capture.</h1>
+        <p class="lead measure">
+          A bilingual (English/తెలుగు) listings &amp; lead‑gen concept inspired by MagicBricks + <strong>B09 Proposal</strong> — pilot in Vizag, scale district‑wise.
+        </p>
+
+        <div class="kpis" aria-label="Key outcome indicators">
+          <div class="kpi"><div class="kpi__bar kpi__bar--1"></div><p class="tiny">Qualified Leads — higher is better</p></div>
+          <div class="kpi"><div class="kpi__bar kpi__bar--2"></div><p class="tiny">Time‑to‑Contact — lower is better</p></div>
+          <div class="kpi"><div class="kpi__bar kpi__bar--3"></div><p class="tiny">Geo Coverage — higher is better</p></div>
+        </div>
+
+        <!-- EXECUTIVE SUMMARY -->
+        <div id="summary" class="summary" role="region" aria-label="Executive summary">
+          <div class="summary__grid">
+            <div>
+              <h3 class="card__title">Main Idea — In One Glance</h3>
+              <!-- Simple image card instead of diagram -->
+              <img class="img-soft" alt="Supply to platform to buyer flow"
+                src='data:image/svg+xml;utf8,
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 220">
+                  <rect width="700" height="220" rx="16" fill="%230f1726" />
+                  <rect x="26" y="30" width="180" height="160" rx="14" fill="%23122149" />
+                  <rect x="260" y="30" width="200" height="160" rx="14" fill="%231a2a5e" />
+                  <rect x="500" y="30" width="174" height="160" rx="14" fill="%23122149" />
+                  <circle cx="245" cy="110" r="10" fill="%23ff6b3d"/><circle cx="485" cy="110" r="10" fill="%231fd67d"/>
+                </svg>' />
+              <p class="tiny" style="margin-top:0.6rem">
+                <span class="summary__chip">Step‑1: Verified supply</span>
+                <span class="summary__chip">Step‑2: EN/TE content</span>
+                <span class="summary__chip">Step‑3: Fast lead capture</span>
+                <span class="summary__chip">Step‑4: Shareable URLs</span>
+              </p>
+            </div>
+
+            <div>
+              <h3 class="card__title">Exact Value Proposition (Simple)</h3>
+              <ul class="tiny">
+                <li><strong>Buyers:</strong> <em>Find the right property faster</em> in your language (EN/TE), with verified info and quick call‑backs.</li>
+                <li><strong>Builders/Brokers:</strong> <em>Fewer junk leads</em>, more local and ready‑to‑talk prospects delivered to your Google Sheet for instant follow‑up.</li>
+                <li><strong>Both:</strong> Trustable listings + transparent details + shareable URLs = fewer repeated calls and clearer decisions.</li>
+              </ul>
+              <!-- Simple positioning image -->
+              <img class="img-soft" alt="Positioning: high local language depth &amp; high lead quality"
+                src='data:image/svg+xml;utf8,
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 220">
+                  <rect width="700" height="220" rx="16" fill="%230f1726"/>
+                  <rect x="120" y="30" width="520" height="160" fill="none" stroke="%232b4b9e" stroke-width="2"/>
+                  <circle cx="260" cy="70" r="8" fill="%23ff6b6b"/><circle cx="350" cy="100" r="8" fill="%23ff6b6b"/>
+                  <circle cx="520" cy="160" r="10" fill="%231fd67d"/>
+                </svg>' />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOLUTION (simple images instead of diagrams) -->
+    <section id="solution" class="section" role="region" aria-labelledby="solution-title">
+      <p class="eyebrow">Proposed Solution — Estate Mitra</p>
+      <h2 id="solution-title" class="section-title">How it looks &amp; feels</h2>
+
+      <div class="grid-3">
+        <!-- Listing Explorer -->
+        <article class="card">
+          <img class="card__media" alt="Apartment towers with warm evening light"
+            src='data:image/svg+xml;utf8,
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000">
+              <defs><linearGradient id="grad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="%231a2a5e"/><stop offset="1" stop-color="%230f1a33"/></linearGradient></defs>
+              <rect width="1600" height="1000" fill="%230f1a33"/><rect x="90" y="120" width="300" height="720" fill="url(%23grad)"/><rect x="480" y="200" width="300" height="640" fill="url(%23grad)"/><rect x="870" y="80" width="300" height="760" fill="url(%23grad)"/>
+            </svg>' />
+          <div class="card__body">
+            <h3 class="card__title">Listing Explorer</h3>
+            <p class="tiny">City filters (Vizag, Vizianagaram), project tiles, clean SEO slugs.</p>
+          </div>
+        </article>
+
+        <!-- Location-First map (image) -->
+        <article class="card">
+          <img class="card__media" alt="Andhra Pradesh outline map with Vizag marked"
+            src='data:image/svg+xml;utf8,
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000">
+              <rect width="1600" height="1000" fill="%230f1a33"/>
+              <path d="M220,780 L200,600 280,540 340,480 420,460 520,440 600,420 680,400 760,360 820,340 900,320 960,340 980,380 1020,420 1060,460 1120,500 1180,560 1200,640 1160,700 1080,740 980,780 860,820 760,840 640,840 520,820 420,800 320,800 Z" fill="%231a2a5e" stroke="%23294a9a" stroke-width="6"/>
+              <circle cx="980" cy="380" r="18" fill="%23ff6b3d"/>
+            </svg>' />
+          <div class="card__body">
+            <h3 class="card__title">Location‑First</h3>
+            <p class="tiny">Real locality context for micro‑market narratives.</p>
+          </div>
+        </article>
+
+        <!-- Project Detail (interior-like image) -->
+        <article class="card">
+          <img class="card__media" alt="Warm interior look: wall panel, sofa area silhouette"
+            src='data:image/svg+xml;utf8,
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000">
+              <defs><linearGradient id="wood" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="%234a2f1a"/><stop offset="1" stop-color="%236a3f22"/></linearGradient></defs>
+              <rect width="1600" height="1000" fill="%23121a2a"/><rect x="0" y="820" width="1600" height="180" fill="url(%23wood)"/>
+              <rect x="110" y="180" width="600" height="420" rx="18" fill="%230e1421" stroke="%232a3f75" stroke-width="6"/>
+              <rect x="760" y="220" width="720" height="520" rx="18" fill="%230f1320" stroke="%23243c78" stroke-width="6"/>
+            </svg>' />
+          <div class="card__body">
+            <h3 class="card__title">Project Detail</h3>
+            <p class="tiny">Hero visuals, key facts, “Enquire” CTA (visual only).</p>
+          </div>
+        </article>
+
+        <!-- Lead Capture (image) -->
+        <article class="card">
+          <img class="card__media" alt="Dashboard-like image with bars and form blocks"
+            src='data:image/svg+xml;utf8,
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000">
+              <rect width="1600" height="1000" fill="%23101a33"/>
+              <rect x="160" y="220" width="1280" height="560" rx="16" fill="%230f1726" stroke="%23294a9a" stroke-width="6"/>
+              <rect x="200" y="280" width="600" height="120" rx="10" fill="%23122149"/><rect x="840" y="280" width="200" height="120" rx="10" fill="%231fd67d"/>
+              <rect x="200" y="440" width="600" height="120" rx="10" fill="%23122149"/><rect x="840" y="440" width="280" height="120" rx="10" fill="%23ff6b3d"/>
+            </svg>' />
+          <div class="card__body">
+            <h3 class="card__title">Lead Capture</h3>
+            <p class="tiny">Form ➜ Google Sheets ➜ Sales follow‑up (conceptual).</p>
+          </div>
+        </article>
+
+        <!-- Bilingual UX (image) -->
+        <article class="card">
+          <img class="card__media" alt="Bilingual street-board look: English and Telugu words"
+            src='data:image/svg+xml;utf8,
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000">
+              <rect width="1600" height="1000" fill="%230f1a33"/>
+              <rect x="220" y="260" width="1160" height="180" rx="18" fill="%23122149"/>
+              <rect x="220" y="500" width="1160" height="180" rx="18" fill="%23122149"/>
+            </svg>' />
+          <div class="card__body">
+            <h3 class="card__title">Bilingual UX</h3>
+            <p class="tiny">English ↔ తెలుగు parity for trust and reach.</p>
+          </div>
+        </article>
+
+        <!-- Trust & Verification (image) -->
+        <article class="card">
+          <img class="card__media" alt="Trust circles with a green verified stamp"
+            src='data:image/svg+xml;utf8,
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000">
+              <rect width="1600" height="1000" fill="%230f1a33"/>
+              <circle cx="360" cy="500" r="200" fill="%23122149"/><circle cx="800" cy="460" r="240" fill="%230e1421"/><circle cx="1160" cy="520" r="180" fill="%23122149"/>
+              <rect x="705" y="445" width="190" height="60" rx="12" fill="%231fd67d"/>
+            </svg>' />
+          <div class="card__body">
+            <h3 class="card__title">Trust &amp; Verification</h3>
+            <p class="tiny">Visible verification markers for projects and partners.</p>
+          </div>
+        </article>
+      </div>
+
+      <!-- Lead form (visual only) -->
+      <form class="form" aria-label="Lead form mockup (disabled)">
+        <fieldset disabled aria-disabled="true">
+          <legend><strong>Lead Form (Visual Only)</strong></legend>
+          <label for="name">Name / పేరు</label>
+          <input id="name" type="text" placeholder="e.g., Ananya Rao">
+          <label for="phone">Phone / ఫోన్</label>
+          <input id="phone" type="tel" placeholder="+91 — — — — — — — — —">
+          <label for="loc">Location / స్థానం</label>
+          <input id="loc" type="text" placeholder="Visakhapatnam">
+          <button type="button" class="btn" aria-disabled="true">Submit (Mock)</button>
+        </fieldset>
+      </form>
+
+      <!-- Architecture lanes -->
+      <div class="arch" aria-label="Scalable architecture lanes">
+        <div class="arch__row">
+          <div class="arch__box">City 1: Vizag</div>
+          <div class="arch__box">City 2: Vizianagaram</div>
+          <div class="arch__box">City 3+: Expansion</div>
+        </div>
+        <div class="arch__row">
+          <div class="arch__box">SEO‑ready Structure</div>
+          <div class="arch__box">Shareable Project URLs</div>
+          <div class="arch__box">Bilingual Content Blocks</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="business" class="section" role="region" aria-labelledby="biz-title">
+      <p class="eyebrow">Business Model — Visual Frameworks</p>
+      <h2 id="biz-title" class="section-title">BMC + Porter’s Five Forces</h2>
+
+      <article class="bmc">
+        <h3 class="card__title">Business Model Canvas</h3>
+        <div class="table-wrap" role="region" aria-label="Scrollable BMC table">
+          <table class="table-bmc" role="table" aria-label="Business Model Canvas">
+            <thead>
+              <tr>
+                <th scope="col">Key Partners</th>
+                <th scope="col">Key Activities</th>
+                <th scope="col">Key Resources</th>
+                <th scope="col">Value Proposition</th>
+                <th scope="col">Customer Relationships</th>
+                <th scope="col">Channels</th>
+                <th scope="col">Customer Segments</th>
+                <th scope="col">Cost Structure</th>
+                <th scope="col">Revenue Streams</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Builders, agents, local brokers <span class="badge">Supply</span></td>
+                <td>Acquire &amp; verify listings; SEO; lead routing</td>
+                <td>Brand, content, locality data, ops playbooks</td>
+                <td>Trusted discovery; faster contact; Telugu support</td>
+                <td>Assisted discovery; callbacks; alerts</td>
+                <td>Search, social, referrals, WhatsApp share</td>
+                <td>Homebuyers, investors, NRI</td>
+                <td>Marketing, ops, hosting/CDN</td>
+                <td>Featured listings, lead packages, ads</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <article class="forces" aria-label="Porter’s Five Forces">
+        <h3 class="card__title">Porter’s Five Forces</h3>
+        <div class="forces__diagram">
+          <div class="force force--suppliers">
+            <p class="tiny"><strong>Suppliers (Builders):</strong> Medium — many local partners; trust &amp; verification matter.</p>
+            <img class="img-soft" alt="Construction cranes silhouette at dusk"
+              src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200"><rect width="800" height="200" fill="%23101a33"/><rect x="60" y="40" width="160" height="120" fill="%231a2a5e"/><rect x="240" y="30" width="160" height="130" fill="%231a2a5e"/><rect x="420" y="50" width="160" height="110" fill="%231a2a5e"/><rect x="620" y="60" width="120" height="100" fill="%23ff6b3d"/></svg>' />
+          </div>
+          <div class="force force--buyers">
+            <p class="tiny"><strong>Buyers (Seekers):</strong> High — multiple portals; win via localization &amp; speed.</p>
+            <img class="img-soft" alt="Couple reviewing brochures at a desk"
+              src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200"><rect width="800" height="200" fill="%23101a33"/><circle cx="120" cy="100" r="50" fill="%23122149"/><circle cx="260" cy="100" r="50" fill="%230e1421"/><rect x="420" y="70" width="240" height="60" rx="10" fill="%231fd67d"/></svg>' />
+          </div>
+          <div class="force force--rivalry">
+            <p class="tiny"><strong>Rivalry:</strong> High — national incumbents; differentiate via EN/TE and lead quality.</p>
+            <img class="img-soft" alt="Multiple devices with portals open"
+              src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200"><rect width="800" height="200" fill="%230f1726"/><rect x="60" y="40" width="160" height="120" fill="%231a2a5e"/><rect x="240" y="40" width="160" height="120" fill="%231a2a5e"/><rect x="420" y="40" width="160" height="120" fill="%231a2a5e"/><rect x="600" y="40" width="140" height="120" fill="%231a2a5e"/></svg>' />
+          </div>
+          <div class="force force--new">
+            <p class="tiny"><strong>New Entrants:</strong> Medium — SEO + brand consistency create moat.</p>
+            <img class="img-soft" alt="Small startup desk with laptop silhouette"
+              src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200"><rect width="800" height="200" fill="%23101a33"/><rect x="80" y="60" width="200" height="100" rx="14" fill="%23122149"/><rect x="320" y="60" width="200" height="100" rx="14" fill="%23122149"/><rect x="560" y="60" width="140" height="100" rx="14" fill="%23ff6b3d"/></svg>' />
+          </div>
+          <div class="force force--subs">
+            <p class="tiny"><strong>Substitutes:</strong> Medium — brokers &amp; WhatsApp groups.</p>
+            <img class="img-soft" alt="Chat bubbles hinting at messaging groups"
+              src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200"><rect width="800" height="200" fill="%230f1726"/><rect x="80" y="60" width="260" height="100" rx="20" fill="%23122149"/><rect x="380" y="60" width="180" height="100" rx="20" fill="%23122149"/><rect x="590" y="60" width="130" height="100" rx="20" fill="%231fd67d"/></svg>' />
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section id="wbd" class="section" role="region" aria-labelledby="wbd-title">
+      <p class="eyebrow">WBD Requirements — Visual</p>
+      <h2 id="wbd-title" class="section-title">Everything shown, not just said</h2>
+
+      <div class="wbd__grid">
+        <figure class="wbd__card">
+          <img class="img-soft" alt="Responsive phone and desktop on desk"
+            src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360"><rect width="1200" height="360" fill="%230f1726"/><rect x="80" y="40" width="680" height="280" rx="18" fill="%23122149"/><rect x="880" y="60" width="240" height="240" rx="36" fill="%23101a33"/><rect x="920" y="110" width="160" height="140" rx="12" fill="%231a2a5e"/></svg>' />
+          <figcaption><strong>Core Website</strong></figcaption>
+          <div class="mock-row"><span class="mock">🦻 Accessible</span><span class="mock">⏱️ Fast</span><span class="mock">&lt;header&gt; &lt;nav&gt; &lt;main&gt;</span><span class="mock">🔖 Favicon</span></div>
+          <p class="tiny">Mobile responsive, semantic HTML, central CSS (this file), consistent deck style.</p>
+        </figure>
+
+        <figure class="wbd__card">
+          <img class="img-soft" alt="HTTPS padlock and config strips"
+            src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360"><rect width="1200" height="360" fill="%230f1726"/><rect x="80" y="60" width="1040" height="80" rx="12" fill="%23122149"/><rect x="80" y="180" width="300" height="80" rx="12" fill="%23101a33"/><rect x="400" y="180" width="300" height="80" rx="12" fill="%23101a33"/></svg>' />
+          <figcaption><strong>Security &amp; Site Configuration</strong></figcaption>
+          <div class="mock-row"><span class="urlbar">🔒 https://estatemitra.example</span><span class="filetag">/security.txt</span><span class="filetag">/robots.txt</span></div>
+          <p class="tiny">Root config represented visually.</p>
+        </figure>
+
+        <figure class="wbd__card">
+          <img class="img-soft" alt="Sitemap tiles image"
+            src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360"><rect width="1200" height="360" fill="%230f1726"/><rect x="100" y="70" width="210" height="80" rx="10" fill="%23122149"/><rect x="340" y="70" width="210" height="80" rx="10" fill="%23122149"/><rect x="580" y="70" width="250" height="80" rx="10" fill="%23122149"/><rect x="860" y="70" width="210" height="80" rx="10" fill="%23122149"/><rect x="100" y="210" width="210" height="80" rx="10" fill="%23122149"/><rect x="340" y="210" width="210" height="80" rx="10" fill="%23122149"/></svg>' />
+          <figcaption><strong>SEO &amp; Sitemap</strong></figcaption>
+          <div class="sitemap" role="img" aria-label="Sitemap blocks"><span class="sm">/</span><span class="sm">/projects</span><span class="sm">/project/{slug}</span><span class="sm">/blog</span><span class="sm">/contact</span><span class="sm">/privacy</span></div>
+          <p class="tiny">Keywords rationale &amp; clean IA (concept).</p>
+        </figure>
+
+        <figure class="wbd__card">
+          <img class="img-soft" alt="Three social cards on a grid"
+            src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360"><rect width="1200" height="360" fill="%230f1726"/><rect x="80" y="60" width="300" height="240" rx="14" fill="%23122149"/><rect x="420" y="60" width="300" height="240" rx="14" fill="%23122149"/><rect x="760" y="60" width="300" height="240" rx="14" fill="%23122149"/></svg>' />
+          <figcaption><strong>Social Media Integration</strong></figcaption>
+          <div class="mock-row"><span class="chip">Share ↗</span><span class="chip">Like ♥</span><span class="chip">Subscribe ▶</span></div>
+          <p class="tiny">Buttons styled to match brand (conceptual).</p>
+        </figure>
+
+        <figure class="wbd__card">
+          <img class="img-soft" alt="Two panels and one hidden panel visual"
+            src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360"><rect width="1200" height="360" fill="%230f1726"/><rect x="160" y="40" width="320" height="280" rx="14" fill="%23122149"/><rect x="720" y="40" width="320" height="280" rx="14" fill="%23122149"/><rect x="480" y="40" width="240" height="280" rx="14" fill="%230e1421"/></svg>' />
+          <figcaption><strong>Hidden / Instructors‑only</strong></figcaption>
+          <div class="mock-row"><span class="urlbar">/instructors/7f9a-phi-42</span><span class="filetag">Handwritten HTML</span></div>
+          <div class="panel" role="region" aria-label="Team &amp; testimonial">
+            <table class="team" aria-label="Team members" style="width:100%; border-collapse:collapse">
+              <thead><tr><th style="border:1px solid var(--line); padding:0.5rem">Name</th><th style="border:1px solid var(--line); padding:0.5rem">Role</th></tr></thead>
+              <tbody>
+                <tr><td style="border:1px solid var(--line); padding:0.5rem">Spandan Parida</td><td style="border:1px solid var(--line); padding:0.5rem">Coordination</td></tr>
+                <tr><td style="border:1px solid var(--line); padding:0.5rem">Essam Hussein</td><td style="border:1px solid var(--line); padding:0.5rem">UX &amp; Content</td></tr>
+                <tr><td style="border:1px solid var(--line); padding:0.5rem">Pediredla Mukesh</td><td style="border:1px solid var(--line); padding:0.5rem">Listings Ops</td></tr>
+                <tr><td style="border:1px solid var(--line); padding:0.5rem">Sarthak Agarwal</td><td style="border:1px solid var(--line); padding:0.5rem">SEO &amp; Data</td></tr>
+              </tbody>
+            </table>
+            <blockquote class="tiny" style="margin-top:0.6rem">
+              “The minimal bilingual UX is exactly what Vizag buyers needed.” — Sample Testimonial
+            </blockquote>
+          </div>
+        </figure>
+
+        <figure class="wbd__card">
+          <img class="img-soft" alt="Spreadsheet and bar chart impression"
+            src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360"><rect width="1200" height="360" fill="%230f1726"/><rect x="80" y="60" width="520" height="240" rx="12" fill="%23122149"/><rect x="600" y="60" width="520" height="240" rx="12" fill="%23122149"/><rect x="640" y="100" width="40" height="160" fill="%231fd67d"/><rect x="700" y="120" width="40" height="140" fill="%231fd67d"/><rect x="760" y="140" width="40" height="120" fill="%231fd67d"/><rect x="820" y="160" width="40" height="100" fill="%231fd67d"/></svg>' />
+          <figcaption><strong>Optimization &amp; Data Viz</strong></figcaption>
+          <div class="mock-row"><span class="mock">WebP • Lazy‑ready (concept)</span><span class="mock" role="img" aria-label="Bar chart mock">▮▮▮▮▮</span></div>
+          <p class="tiny">Figures noted as <em>higher/lower is better</em> for quick read.</p>
+        </figure>
+
+        <figure class="wbd__card">
+          <img class="img-soft" alt="Pinned map areas"
+            src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360"><rect width="1200" height="360" fill="%230f1726"/><rect x="80" y="40" width="1040" height="280" rx="16" fill="%23122149"/><circle cx="360" cy="160" r="12" fill="%23ff6b3d"/><circle cx="720" cy="220" r="12" fill="%231fd67d"/></svg>' />
+          <figcaption><strong>Special Features</strong></figcaption>
+          <div class="mock-row"><span class="chip">LinkedIn ↗</span><span class="mapmock" role="img" aria-label="Map placeholder">📍 IIM Rohtak / Vizag</span></div>
+        </figure>
+      </div>
+    </section>
+
+    <section id="analysis" class="section" role="region" aria-labelledby="analysis-title">
+      <p class="eyebrow">Analysis &amp; Roadmap</p>
+      <h2 id="analysis-title" class="section-title">Our Unique Edge — Why Estate Mitra Wins</h2>
+
+      <div class="grid-2">
+        <div class="panel">
+          <h3 class="card__title">Value Proposition (to‑the‑point)</h3>
+          <ul class="tiny">
+            <li><strong>Buyers:</strong> <em>Find the right property faster</em> in EN/TE with verified info and a call‑back SLA.</li>
+            <li><strong>Builders/Brokers:</strong> <em>Higher‑intent local leads</em> dropped into Google Sheets for immediate action.</li>
+            <li><strong>Everyone:</strong> Fewer calls, more clarity — shareable URLs and transparent details.</li>
+          </ul>
+        </div>
+
+        <div class="panel">
+          <h3 class="card__title">Differentiators vs Incumbents</h3>
+          <ul class="tiny">
+            <li><strong>Hyperlocal + Bilingual:</strong> Telugu parity content, not just translation.</li>
+            <li><strong>Verification Badge:</strong> Trust markers for listings and partners.</li>
+            <li><strong>Fast Call‑back SLA:</strong> Time‑boxed expectations improve experience.</li>
+            <li><strong>Sheets‑First Ops:</strong> No new tools — instant data capture for partners.</li>
+            <li><strong>Locality SEO:</strong> City → locality → project slugs build durable traffic.</li>
+            <li><strong>Share Cards:</strong> WhatsApp‑friendly summaries drive organic referrals.</li>
+          </ul>
+        </div>
+
+        <div class="panel">
+          <h3 class="card__title">Go‑to‑Market (90‑Day Pilot)</h3>
+          <ol class="tiny">
+            <li><strong>W1‑2:</strong> Onboard 5 builders, gather assets, draft EN/TE pages.</li>
+            <li><strong>W3‑4:</strong> Publish locality primers; enable inquiry mock; set SLA.</li>
+            <li><strong>W5‑8:</strong> Reels + map posts; WhatsApp share cards; events.</li>
+            <li><strong>W9‑12:</strong> Tighten SEO; verify badges; showcase testimonials.</li>
+          </ol>
+          <p class="tiny"><strong>North‑star:</strong> Qualified Leads / Project / Week. <strong>Guardrails:</strong> Bounce %, Time‑to‑First‑Contact, Verification success.</p>
+        </div>
+
+        <div class="panel">
+          <h3 class="card__title">Risks &amp; Mitigation</h3>
+          <ul class="tiny">
+            <li><strong>Lead quality variance:</strong> Progressive prompts during follow‑up; dedupe in ops (future).</li>
+            <li><strong>Rivalry pressure:</strong> Double‑down on Telugu + locality insights; highlight verification badge.</li>
+            <li><strong>Content workload:</strong> Templated blocks; partner‑submitted media; phased rollouts.</li>
+            <li><strong>Trust gap:</strong> Partner logos, approvals, and reviews where possible.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="cta" class="section cta" role="region" aria-labelledby="cta-title">
+      <h2 id="cta-title" class="display">Pilot in Vizag, Scale Statewide</h2>
+      <p class="lead measure">Ready to test featured listings &amp; lead routing with local builders?</p>
+      <div class="cta__buttons">
+        <a class="btn" href="#solution" aria-label="Review solution visuals">Review Solution</a>
+        <a class="btn btn--ghost" href="#business" aria-label="Open business model visuals">Business Model</a>
+      </div>
+      <p class="tiny credit">All images are inline, self‑contained, and styled for a clean investor‑deck aesthetic.</p>
+    </section>
+
+    <section id="problem" class="section" role="region" aria-labelledby="problem-title">
+      <h2 id="problem-title" class="section-title">Problem Statement</h2>
+      <p>India’s real estate market is vast but often fragmented, with information spread across various platforms and offline sources. Property seekers struggle with incomplete or outdated listings, and language barriers can hinder access for non-English speakers. Sellers and developers, on the other hand, face challenges in reaching the right audience and often deal with a high volume of unqualified leads, making the sales process inefficient.</p>
+      <p><strong>Estate Mitra</strong> aims to address these challenges by providing a centralized, trustworthy platform. By offering verified property information in both English and Telugu, it bridges the language gap and builds trust. The platform focuses on generating quality leads and facilitating quick connections between buyers and sellers, streamlining the real estate journey for all stakeholders.</p>
+    </section>
+
+    <section id="build" class="section" role="region" aria-labelledby="build-title">
+      <h2 id="build-title" class="section-title">How We Built the Website</h2>
+      <p>We developed Estate Mitra as a modern web application using front-end web technologies to ensure broad compatibility and ease of use. The entire site is contained in a single HTML5 file, with CSS3 for styling and minimal JavaScript (only where necessary) for interactivity. This single-page approach means all resources (including images and icons as inline SVG or data URIs) are self-contained, resulting in quick load times and a portable deployment.</p>
+      <ul>
+        <li><strong>Responsive &amp; Accessible Design:</strong> The layout employs a responsive grid and flexible units to support desktops, tablets, and mobile devices. We use semantic HTML elements (<code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, etc.) and provide descriptive alt text and ARIA labels to ensure the site meets accessibility standards.</li>
+        <li><strong>Bilingual Content:</strong> All key content is available in both English and Telugu, demonstrated through a language toggle. We included Telugu translations (e.g., labels and taglines) and ensured Unicode support for Telugu script, catering to local language users.</li>
+        <li><strong>Visual Consistency:</strong> We followed an investor pitch-deck aesthetic. A dark theme with high-contrast text and accent colors gives the platform a sleek, modern look. Using a centralized CSS, we applied consistent typography, spacing, and color variables across the site. This not only reinforces our branding but also makes maintenance easier.</li>
+        <li><strong>Lead Capture Integration:</strong> The website’s inquiry forms are structured to collect user data (name, contact, location preferences) and can be hooked into a backend or Google Sheets. For this demo, the form is static, but the design anticipates secure storage and retrieval of leads for timely follow-ups by sales teams.</li>
+        <li><strong>Performance Optimizations:</strong> By inlining assets and minimizing external calls, we reduced page load times. The CSS is optimized with reusability in mind, and we avoid heavy frameworks to keep the site lightweight. The result is a fast, efficient user experience that performs well even on mobile networks.</li>
+      </ul>
+    </section>
+
+    <section id="future" class="section" role="region" aria-labelledby="future-title">
+      <h2 id="future-title" class="section-title">Future Scope</h2>
+      <p>This project is envisioned as a long-term platform with the potential to scale beyond the initial regions and feature set. Some of the future developments planned for Estate Mitra include:</p>
+      <ul>
+        <li><strong>Geographical Expansion:</strong> Roll out the platform to more cities and states. After the Andhra Pradesh pilot (Visakhapatnam &amp; Vizianagaram), we plan to onboard listings from other urban centers, adapting the bilingual content model to additional local languages as needed.</li>
+        <li><strong>Dynamic Content &amp; CMS:</strong> Implement a backend with a database and Content Management System for real-time listing updates. This will allow property developers and agents to add or update their listings directly, keeping information current without manual HTML edits.</li>
+        <li><strong>Feature Enhancements:</strong> Introduce map-based search so users can explore properties via an interactive map. Add user accounts for buyers to save favorite properties and receive notifications (e.g., price drops or new listings matching their criteria). We also foresee integrating virtual tours or video walkthroughs for properties to provide richer insights.</li>
+        <li><strong>Mobile App:</strong> Develop a dedicated mobile application for Android/iOS to complement the website, offering on-the-go access and push notifications for new leads or listings.</li>
+        <li><strong>Monetization Strategies:</strong> Explore revenue streams such as premium listing placements for sellers, partnership advertising (with banks for home loans, for example), and subscription models for value-added services. These would be implemented carefully to ensure they enhance rather than detract from the user experience.</li>
+      </ul>
+      <p>By continuously evolving with user feedback and industry trends, Estate Mitra aims to become a comprehensive real estate solution, not just for the current market but also for the emerging digital-first real estate ecosystem in India.</p>
+    </section>
+
+    <section id="seo" class="section" role="region" aria-labelledby="seo-title">
+      <h2 id="seo-title" class="section-title">SEO Strategy</h2>
+      <p>Search Engine Optimization is critical for our platform’s visibility. Estate Mitra’s SEO strategy focuses on local relevance and technical excellence to ensure that people searching for properties can easily find our listings:</p>
+      <ul>
+        <li><strong>Localized Keywords:</strong> We optimize page content with keywords that buyers are likely to use, in both English and Telugu. For example, project pages and meta tags include phrases like “2 BHK flat in Visakhapatnam” as well as the Telugu equivalent for those searching in the local language.</li>
+        <li><strong>SEO-Friendly URLs &amp; Sitemap:</strong> The site uses clean URLs (e.g., <code>/project/vasant-vihar-vizag</code>) which are easy for search engines to index and for users to remember. We provide a structured XML sitemap covering all key pages (home, project listings, detail pages, contact, etc.), to guide search engine crawlers through our content efficiently.</li>
+        <li><strong>Fast Loading Times:</strong> By bundling all resources into one file and using optimized images (including SVGs for graphics), the site loads quickly. Fast load times improve user experience and are favored by search engine algorithms, thereby indirectly boosting our rankings.</li>
+        <li><strong>Mobile Optimization:</strong> The responsive design ensures the site performs well on mobile devices. Given Google’s mobile-first indexing, having a mobile-friendly interface helps our pages rank higher when users search on smartphones, which is common for real estate queries on the go.</li>
+        <li><strong>Content Freshness &amp; Quality:</strong> We plan regular content updates via a blog and new listings. Fresh, informative content (market trends, new project launches, buyer guides) will not only attract repeat visitors but also signal to search engines that our site is active and relevant. All content undergoes quality checks for accuracy and clarity, enhancing user trust and reducing bounce rates.</li>
+        <li><strong>Technical SEO:</strong> The site includes appropriate meta descriptions and headings to make indexing accurate. We also anticipate using structured data markup (such as <em>schema.org</em> for real estate listings) in the future so that search engines can display rich snippets (like property details) directly on the results page.</li>
+      </ul>
+      <p>Combined, these efforts form a robust SEO strategy that will help Estate Mitra gain organic visibility, drive targeted traffic, and ultimately connect more buyers with the properties they seek.</p>
+    </section>
+
+    <section id="about" class="section" role="region" aria-labelledby="about-title">
+      <h2 id="about-title" class="section-title">About Us</h2>
+      <p><strong>Estate Mitra</strong> is a bilingual real estate platform dedicated to simplifying property discovery and lead generation in India. We leverage technology to connect homebuyers and investors with trusted property developers and sellers. Our name “Mitra” means <em>friend</em>, reflecting our mission to be a reliable partner in your real estate journey.</p>
+      <p>Founded with a vision to bring transparency and efficiency to the real estate market, Estate Mitra offers a seamless experience for exploring residential plots, flats, and apartments across regions. Our professional team of real estate and tech experts continuously works to expand our listings and ensure up-to-date, accurate information for all users.</p>
+    </section>
+
+    <section id="services" class="section" role="region" aria-labelledby="services-title">
+      <h2 id="services-title" class="section-title">Services</h2>
+      <p>Estate Mitra provides a comprehensive suite of services to cater to property seekers and sellers:</p>
+      <ul>
+        <li><strong>Property Listings:</strong> Browse a curated catalog of residential plots, apartments, and investment properties with detailed descriptions and high-quality images.</li>
+        <li><strong>Advanced Search &amp; Filters:</strong> Find the perfect property by location, type, price range, and other key criteria, ensuring a personalized search experience.</li>
+        <li><strong>Project Pages:</strong> Access dedicated pages for each listing with complete project details, amenities, and neighborhood insights. Share these pages easily via unique URLs.</li>
+        <li><strong>Lead Capture Forms:</strong> Express interest in a property through simple inquiry forms. Provide your name, contact, and preferences — our system securely stores these leads for prompt follow-up.</li>
+        <li><strong>Bilingual Support:</strong> Engage with content in English or Telugu. Our platform’s dual-language support broadens reach and comfort for local clients, making information accessible to a wider audience.</li>
+        <li><strong>Real Estate Insights:</strong> Stay informed with our blog featuring market trends, investment tips, and expert opinions to help you make educated decisions <em>(coming soon)</em>.</li>
+      </ul>
+    </section>
+
+    <section id="whatwedo" class="section" role="region" aria-labelledby="whatwedo-title">
+      <h2 id="whatwedo-title" class="section-title">What We Do</h2>
+      <p>We empower property buyers and sellers by providing a centralized online platform for real estate discovery. Estate Mitra consolidates diverse property listings into a single, easy-to-navigate portal. Users can effortlessly explore and compare projects across various cities and districts, all in one place.</p>
+      <p>Our platform streamlines the entire process of finding and promoting real estate projects. For buyers, we ensure a fast, user-friendly browsing experience with powerful search tools and bilingual content. For sellers and developers, we offer a robust listing service that maximizes visibility and generates qualified leads. By bridging the gap between demand and supply, we help stakeholders save time, reduce marketing costs, and focus on closing deals.</p>
+    </section>
+
+    <section id="unique" class="section" role="region" aria-labelledby="unique-title">
+      <h2 id="unique-title" class="section-title">How We Are Unique</h2>
+      <ul>
+        <li><strong>Bilingual Platform:</strong> We break language barriers by offering content in both English and Telugu, reaching a wider audience and making every user feel at home.</li>
+        <li><strong>Hyper-Local Focus:</strong> Our initial focus is on key regions like Andhra Pradesh (Visakhapatnam &amp; Vizianagaram), allowing us to provide in-depth local market knowledge. The platform is scalable and structured to expand into new cities and states seamlessly.</li>
+        <li><strong>Integrated Lead Management:</strong> Inquiries from interested buyers are instantly captured and organized. Lead details (name, phone, location) are automatically logged into a secure database, streamlining follow-ups and conversion tracking for sellers.</li>
+        <li><strong>User-Friendly Design:</strong> Estate Mitra features a clean, modern interface with an investor-deck aesthetic. The dark theme with high-contrast elements reduces eye strain and gives the platform a professional, premium look.</li>
+        <li><strong>Performance &amp; SEO Optimized:</strong> Our site is optimized for speed and search visibility. From responsive design for mobile users to SEO-friendly URLs and metadata, we ensure that listings on Estate Mitra are easy to find and fast to load.</li>
+        <li><strong>Trusted Content:</strong> Each listing is verified for accuracy, and our team regularly updates project information. We also incorporate client testimonials and success stories to build trust and credibility in our community.</li>
+      </ul>
+    </section>
+
+    <section id="contact" class="section" role="region" aria-labelledby="contact-title">
+      <h2 id="contact-title" class="section-title">Contact Us</h2>
+      <div class="grid-2">
+        <div>
+          <p>We’d love to hear from you. Whether you are a property seeker with questions or a developer interested in listing your project, our team is here to help.</p>
+          <p><strong>Phone:</strong> +91-98765-43210 <span class="tiny">(Mon–Fri, 9am–6pm IST)</span></p>
+          <p><strong>Email:</strong> <a href="mailto:contact@estatemitra.com">contact@estatemitra.com</a></p>
+          <p><strong>Address:</strong> Visakhapatnam, Andhra Pradesh, India</p>
+          <p>Connect with us on <a href="#">LinkedIn</a>, <a href="#">Twitter</a>, and <a href="#">Facebook</a> for updates.</p>
+          <div class="map-container">
+            <img class="img-soft" alt="Map of Andhra Pradesh with Visakhapatnam highlighted"
+              src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000"><rect width="1600" height="1000" fill="%230f1a33"/><path d="M220,780 L200,600 280,540 340,480 420,460 520,440 600,420 680,400 760,360 820,340 900,320 960,340 980,380 1020,420 1060,460 1120,500 1180,560 1200,640 1160,700 1080,740 980,780 860,820 760,840 640,840 520,820 420,800 320,800 Z" fill="%231a2a5e" stroke="%23294a9a" stroke-width="6"/><circle cx="980" cy="380" r="18" fill="%23ff6b3d"/></svg>' />
+            <p class="tiny" style="margin-top:0.5rem;">(Office location – Visakhapatnam)</p>
+          </div>
+        </div>
+        <div>
+          <form action="#" method="post">
+            <label for="contact-name">Name:</label>
+            <input type="text" id="contact-name" name="name" required />
+            <label for="contact-email">Email:</label>
+            <input type="email" id="contact-email" name="email" required />
+            <label for="contact-message">Message:</label>
+            <textarea id="contact-message" name="message" rows="4" required></textarea>
+            <button type="submit" class="btn">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer" role="contentinfo">
+    <small>© 2025 Estate Mitra (Concept Demo). HTML5 + CSS3 only. No JavaScript. One‑file build.</small>
+  </footer>
+</body>
+</html>

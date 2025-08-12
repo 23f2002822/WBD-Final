@@ -1,0 +1,1 @@
+// This file is intentionally left blank. The application is now powered by vanilla JavaScript (script.js) to meet the project requirements. This prevents the old React/TypeScript code from causing errors.
